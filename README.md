@@ -4,6 +4,8 @@ Hides the Omarchy bar. Move the pointer to the screen edge and the bar comes bac
 
 This is for Omarchy 4. It does not work with the old Waybar bar.
 
+Original plugin by [Eric van Riet Paap](https://github.com/ericvrp/omarchy-bar-autohide). This fork keeps that work going.
+
 ## What it does
 
 - Hides the bar when it starts.

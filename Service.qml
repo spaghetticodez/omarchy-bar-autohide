@@ -6,7 +6,7 @@ import qs.Commons
 
 // Hide the bar. A one-pixel edge reveals it; the pointer leaving that band hides it again.
 // Third-party services only get barHidden, barSize, and position, so leave-detection
-// is a cursor poll while the bar is revealed. That poll does not cover the bar, so clicks still land.
+// is a cursor poll after the pointer leaves the edge. The poll does not cover the bar, so clicks still land.
 Item {
   id: root
 
@@ -81,9 +81,9 @@ Item {
   }
 
   Timer {
-    interval: 80
+    interval: 200
     repeat: true
-    running: root.autoRevealed && !root.barHidden
+    running: root.autoRevealed && !root.barHidden && !root.edgeHovered
     onTriggered: if (!cursorProbe.running) cursorProbe.running = true
     onRunningChanged: if (!running) root.pointerInBarBand = false
   }

@@ -1,47 +1,26 @@
 # Omarchy Bar Autohide
 
-An event-driven auto-hide service plugin for the Omarchy bar.
-
-![Omarchy Bar Autohide hidden and revealed states](preview.png)
+Hides the Omarchy bar until the pointer hits its screen edge.
 
 > [!IMPORTANT]
-> This plugin is for **Omarchy 4 (Quattro)**, where the desktop shell and bar
-> use [Quickshell](https://quickshell.org/). It is not intended for older
-> Omarchy releases that use Waybar.
+> Omarchy 4 Quickshell bar. Not for older Waybar releases.
 
 ## Behavior
 
-- Supports bars anchored to the top, bottom, left, or right screen edge.
-- Reveals the bar only when the pointer reaches its anchored screen edge.
-- Keeps the bar open while the pointer remains over it.
-- Hides the bar 1000ms after the pointer leaves that area.
-- Leaves the bar visible when the user opens it with the bar hotkey.
-- Keeps the bar visible while a bar popout is open.
-- Supports multiple monitors, scaling, rotation, and monitor offsets.
+- Hides the bar when the plugin loads.
+- Reveals it when the pointer reaches the bar's screen edge.
+- Hides it again one second after the pointer leaves the bar.
+- A manual show stays up until the edge is used.
+- Works on any screen edge, and on more than one monitor.
+- Disabling the plugin shows the bar.
 
-A transparent one-pixel Quickshell surface listens for pointer entry at the bar
-edge. When the host still exposes the live Bar object, a passive hover observer
-attached to each bar surface handles pointer exit without blocking its controls.
-
-Omarchy 4.0.3+ gives third-party services a scalar bar facade (`PluginBarStateApi`)
-without `bar.data` or `activePopout`. In that case the plugin polls
-`hyprctl cursorpos` only while the bar is auto-revealed, so widgets stay
-reachable. There is no persistent helper process.
-
-## Requirements
-
-- Omarchy with the Quickshell bar
-- Hyprland
+The service cannot see the bar's own surface, so while the bar is revealed it checks `hyprctl cursorpos` instead of covering the bar. Clicks still reach the widgets. There is no helper process left running after the bar hides.
 
 ## Install
 
 ```bash
-omarchy plugin add https://github.com/ericvrp/omarchy-bar-autohide.git --enable
+omarchy plugin add https://github.com/spaghetticodez/omarchy-bar-autohide.git --enable
 ```
-
-Omarchy clones the repository to
-`~/.config/omarchy/plugins/ericvrp.bar-autohide`, validates it, and enables the
-service in the shell configuration.
 
 ## Update
 
@@ -49,26 +28,14 @@ service in the shell configuration.
 omarchy plugin update ericvrp.bar-autohide
 ```
 
+The installed copy should track this fork. Upstream `ericvrp/omarchy-bar-autohide` is no longer maintained.
+
 ## Disable
 
 ```bash
 omarchy plugin disable ericvrp.bar-autohide
 ```
 
-Disabling or removing the plugin restores the bar visibility state from before
-the plugin was enabled.
+## License
 
-## Uninstall
-
-```bash
-omarchy plugin remove ericvrp.bar-autohide
-```
-
-## License And Warranty
-
-Licensed under the [MIT License](LICENSE).
-
-The software is provided **as is, without warranty of any kind**, express or
-implied. See the license for the complete warranty and liability disclaimer.
-
-Development and local testing instructions are in [DEVELOPING.md](DEVELOPING.md).
+[MIT](LICENSE). Provided as is, without warranty.

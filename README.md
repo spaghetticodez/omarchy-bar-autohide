@@ -1,20 +1,17 @@
-# Omarchy Bar Autohide
+# Bar Autohide
 
-Hides the Omarchy bar until the pointer hits its screen edge.
+Hides the Omarchy bar. Move the pointer to the screen edge and the bar comes back. It hides again one second after the pointer leaves.
 
-> [!IMPORTANT]
-> Omarchy 4 Quickshell bar. Not for older Waybar releases.
+This is for Omarchy 4. It does not work with the old Waybar bar.
 
-## Behavior
+## What it does
 
-- Hides the bar when the plugin loads.
-- Reveals it when the pointer reaches the bar's screen edge.
-- Hides it again one second after the pointer leaves the bar.
-- A manual show stays up until the edge is used.
-- Works on any screen edge, and on more than one monitor.
-- Disabling the plugin shows the bar.
-
-The service cannot see the bar's own surface, so while the bar is revealed it checks `hyprctl cursorpos` instead of covering the bar. Clicks still reach the widgets. There is no helper process left running after the bar hides.
+- Hides the bar when it starts.
+- Shows the bar when the pointer touches the bar's edge.
+- Hides the bar again after the pointer leaves.
+- If you show the bar yourself, it stays until you use the edge.
+- Works on the top, bottom, left, or right edge, and on more than one screen.
+- Turning the plugin off shows the bar.
 
 ## Install
 
@@ -28,9 +25,9 @@ omarchy plugin add https://github.com/spaghetticodez/omarchy-bar-autohide.git --
 omarchy plugin update ericvrp.bar-autohide
 ```
 
-The installed copy should track this fork. Upstream `ericvrp/omarchy-bar-autohide` is no longer maintained.
+Use this fork. The original project is no longer updated.
 
-## Disable
+## Turn off
 
 ```bash
 omarchy plugin disable ericvrp.bar-autohide
@@ -38,4 +35,4 @@ omarchy plugin disable ericvrp.bar-autohide
 
 ## License
 
-[MIT](LICENSE). Provided as is, without warranty.
+[MIT](LICENSE). No warranty.

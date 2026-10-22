@@ -73,9 +73,15 @@ Item {
     command: ["hyprctl", "cursorpos"]
     stdout: StdioCollector {
       onStreamFinished: {
+        if (!root.autoRevealed || root.barHidden) return
         const parts = String(this.text || "").trim().split(",")
-        if (parts.length < 2) return
-        root.pointerInBarBand = root.cursorInBarBand(Number(parts[0]), Number(parts[1]))
+        const px = Number(parts[0])
+        const py = Number(parts[1])
+        if (parts.length < 2 || Number.isNaN(px) || Number.isNaN(py)) {
+          root.pointerInBarBand = false
+          return
+        }
+        root.pointerInBarBand = root.cursorInBarBand(px, py)
       }
     }
   }
